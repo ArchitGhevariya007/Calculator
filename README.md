@@ -5,4 +5,4 @@ Objective of this Application was to learn basics of react and create simple min
 
 ## UI
 
-<img src="./src/Assets/UI.png">
+<img src="./src/Assets/UI.png" width="100px">
