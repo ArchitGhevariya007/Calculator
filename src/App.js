@@ -1,6 +1,6 @@
 import "./App.css";
-import { Map } from "react";
-import { Box, Input, Button, Stack, TextField } from "@mui/material";
+import { useState } from "react";
+import { Box, Button, Stack, TextField } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 function App() {
@@ -15,34 +15,40 @@ function App() {
 
   //Button Array
   const ButtonRow1 = ["C", "+/-", "%", "/"];
-  const ButtonRow2 = [7, 8, 9, "X"];
+  const ButtonRow2 = [7, 8, 9, "*"];
   const ButtonRow3 = [4, 5, 6, "-"];
   const ButtonRow4 = [1, 2, 3, "+"];
   const ButtonRow5 = [0, ".", "<", "="];
 
-  // const ButtonList = [
-  //   {
-  //     one: 1,
-  //     two: 2,
-  //     three: 3,
-  //     four: 4,
-  //     five: 5,
-  //     six: 6,
-  //     seven: 7,
-  //     eight: 8,
-  //     nine: 9,
-  //     zero: 0,
-  //     clear: "C",
-  //     pluseminus: "+/-",
-  //     modulo: "%",
-  //     minus: "-",
-  //     plus: "+",
-  //     multipy: "X",
-  //     divide: "/",
-  //     dot: ".",
-  //     cancle: "<",
-  //   },
-  // ];
+  //Set input into text field on button click
+  const [ButtonData, SetButtonData] = useState("");
+  const [Text2, SetText2] = useState("");
+  const [Text1, SetText1] = useState("");
+
+  // function SetValue(value){
+
+  // }
+
+  const HandleButton = (e) => {
+    const ButtonValue = e.target.value.toString();
+    
+    SetButtonData(ButtonData + ButtonValue);
+    SetText1(ButtonData + ButtonValue);
+    SetText2(ButtonData + ButtonValue);
+    // console.log("value one " +Text1);
+    // console.log("value two " +Text2);
+
+    if (ButtonValue === "C") {
+      SetButtonData("");
+      SetText1("");
+      SetText2("");
+    }
+    if (ButtonValue === "=") {
+      SetText2(eval(Text2).toString());
+      SetText1(Text2);
+    }
+  };
+
 
   return (
     <div className="CalcBody">
@@ -67,14 +73,13 @@ function App() {
           >
             {/* TextBox 1 */}
             <TextField
-              type="number"
+              value={Text1}
               sx={{
                 width: "100%",
                 height: "40%",
                 backgroundColor: "#3b4655",
                 input: {
                   color: "#A7B4BB",
-                  direction: "rtl",
                 },
                 mt: 0.7,
 
@@ -88,15 +93,14 @@ function App() {
 
             {/* TextBox 2 */}
             <TextField
-              type="number"
-              // readOnly={true}
+              value={Text2}
               sx={{
                 width: "100%",
                 height: "60%",
                 backgroundColor: "#3b4655",
                 input: {
                   color: "#d5e8f7",
-                  direction: "rtl",
+                  textAlign:"right",
                   fontSize: 30,
                 },
                 mt: -1.3,
@@ -123,7 +127,9 @@ function App() {
                   variant="contained"
                   color="primary"
                   key={key}
+                  value={btn}
                   disableElevation
+                  onClick={HandleButton}
                   sx={{
                     py: 2.5,
                     width: "30%",
@@ -146,7 +152,9 @@ function App() {
                 <Button
                   variant="contained"
                   color="primary"
+                  onClick={HandleButton}
                   disableElevation
+                  value={btn}
                   key={key}
                   sx={{
                     py: 2.5,
@@ -172,6 +180,8 @@ function App() {
                   color="primary"
                   disableElevation
                   key={key}
+                  value={btn}
+                  onClick={HandleButton}
                   sx={{
                     py: 2.5,
                     width: "30%",
@@ -196,6 +206,8 @@ function App() {
                   color="primary"
                   disableElevation
                   key={key}
+                  value={btn}
+                  onClick={HandleButton}
                   sx={{
                     py: 2.5,
                     width: "30%",
@@ -220,6 +232,8 @@ function App() {
                   color="primary"
                   disableElevation
                   key={key}
+                  value={btn}
+                  onClick={HandleButton}
                   sx={{
                     py: 2.5,
                     width: "30%",
